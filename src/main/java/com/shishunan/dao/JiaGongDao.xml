@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.shishunan.dao.JiaGongDao">
+  	<select id="list" resultMap="smap">
+  		select * from jiagong
+  		<where>
+  			<if test="jid != null">
+  				and jid like concat('%',#{jid},'%')
+  			</if>
+  			<if test="zhizaoId != null">
+  				and zhizaoId like concat('%',#{zhizaoId},'%')
+  			</if>
+  			<if test="zhizaobu != null and zhizaobu != ''">
+  				and zhizaobu like concat('%',#{zhizaobu},'%')
+  			</if>
+  			<if test="sheId != null">
+  				and sheId like concat('%',#{sheId},'%')
+  			</if>
+  			<if test="shebu != null and shebu != ''">
+  				and shebu like concat('%',#{shebu},'%')
+  			</if>
+  			<if test="danwei != null and danwei != ''">
+  				and danwei like concat('%',#{danwei},'%')
+  			</if>
+  			<if test="lianperson != null and lianperson != ''">
+  				and lianperson like concat('%',#{lianperson},'%')
+  			</if>
+  			<if test="shouperson != null and shouperson != ''">
+  				and shouperson like concat('%',#{shouperson},'%')
+  			</if>
+  			<if test="peiperson != null and peiperson != ''">
+  				and peiperson like concat('%',#{peiperson},'%')
+  			</if>
+  			<if test="caiperson != null and caiperson != ''">
+  				and caiperson like concat('%',#{caiperson},'%')
+  			</if>
+  			<if test="biezhu != null and biezhu != ''">
+  				and biezhu like concat('%',#{biezhu},'%')
+  			</if>
+  			<if test="b1 != null and b1 != '' and b2 != null and b2 !=''">
+  				and bsdate between #{b1} and #{b2}
+  			</if>
+  		</where>
+  	</select>
+  	<resultMap type="JiaGong" id="smap">
+  		<id column="jid" property="jid"/>
+  		<result column="bsdate" property="bsdate"/>
+  		<result column="zhizaobu" property="zhizaobu"/>
+  		<result column="zhizaoId" property="zhizaoId"/>
+  		<result column="peijianId" property="peijianId"/>
+  		<result column="price" property="price"/>
+  		<result column="num" property="num"/>
+  		<result column="money" property="money"/>
+  		<result column="yaoqiu" property="yaoqiu"/>
+  		<result column="sheId" property="sheId"/>
+  		<result column="shebu" property="shebu"/>
+  		<result column="peijiandate" property="peijiandate"/>
+  		<result column="faperson" property="faperson"/>
+  		<result column="danwei" property="danwei"/>
+  		<result column="jprice" property="jprice"/>
+  		<result column="shdate" property="shdate"/>
+  		<result column="caiperson" property="caiperson"/>
+  		<result column="img" property="img"/>
+  		<result column="lianperson" property="lianperson"/>
+  		<result column="jine" property="jine"/>
+  		<result column="shouperson" property="shouperson"/>
+  		<result column="peiperson" property="peiperson"/>
+  		<result column="biezhu" property="biezhu"/>
+  		<result column="pid" property="pid"/>
+  		<collection property="parts" ofType="Parts" select="see" column="pid"></collection>
+  	</resultMap>
+  	<select id="see" resultType="Parts">
+  		select * from parts where pid=#{pid}
+  	</select>
+  </mapper>
